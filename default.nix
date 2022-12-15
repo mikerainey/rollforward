@@ -6,7 +6,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  name = "heartbeat-linux";
+  name = "rollforward";
 
   src = ./.;
 
@@ -17,14 +17,17 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out
+    mkdir -p $out/x64
+    cp src/x64/rollforward.* $out/x64
+    cp src/x64/transform.pl $out/x64
   '';
 
   postFixup = ''
-    wrapProgram $out/rf_compiler/transform.pl \
-      --prefix PERL5LIB : "${with perlPackages; makePerlPath [  ]}"
+    wrapProgram $out/x64/transform.pl \
+      --prefix PERL5LIB : "${with perlPackages; makePerlPath [ ]}"
   '';
 
   meta = {
-    description = "Library support for the heartbeat-interrupt kernel module.";
+    description = "Rollforward compiler and runtime support for posix systems.";
   };
 }
