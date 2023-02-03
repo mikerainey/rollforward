@@ -16,7 +16,9 @@ struct rollforward_struct rollforward_table[];
 extern
 struct rollforward_struct rollback_table[];
 
+extern
 void try_to_initiate_rollforward(void **rip);
+extern
 void* try_to_initiate_rollbackward(void* ra_dst);
 
 #define rollforward_handler_annotation \
