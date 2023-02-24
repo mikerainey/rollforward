@@ -22,7 +22,10 @@ extern
 void* try_to_initiate_rollbackward(void* ra_dst);
 
 #define rollforward_handler_annotation \
-   __attribute__((preserve_all, noinline))
+   __attribute__((noinline))
+
+//#define rollforward_handler_annotation	\
+//   __attribute__((preserve_all, noinline))
 
 #define rollbackward \
   { \
